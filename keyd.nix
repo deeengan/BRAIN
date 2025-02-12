@@ -3,12 +3,6 @@
   # https://man.archlinux.org/man/keyd.1.en
   # https://github.com/rvaiya/keyd/blob/2338f11b1ddd81eaddd957de720a3b4279222da0/t/keys.py#L31
 
-  # shift = "oneshot(shift)";
-  # "a" = "overloadi(a, overloadt2(control, a, 200), 150)";
-  # "a" = "lettermod(meta, a, 150, 200)";
-  # "d" = "lettermod(alt, d, 150, 200)";
-  # "k" = "lettermod(control, k, 150, 200)";
-
   # "a+s" = "layer(meta)";
   # "d+f" = "layer(alt)";
   # "j+k" = "layer(shift)";
@@ -23,7 +17,7 @@
             main = {
               # META / SHIFT hyprland
               capslock = "overload(control, esc)";
-              leftalt = "layer(alt)";
+              leftalt = "toggle(alt)";
               leftmeta = "layer(meta)";
               rightalt = "toggle(rightalt)";
               rightmeta = "toggle(rightmeta)";
@@ -56,29 +50,98 @@
               z = "z";
             };
 
-            "alt" = {
-              a = "1";
-              s = "2";
-              d = "3";
-              z = "4";
-              x = "5";
-              c = "6";
-              v = "7";
-              b = "8";
-              n = "9";
-              m = "0";
+            alt = {
+              u = "left";
+              y = "down";
+              n = "up";
+              m = "right";
+              o = "home";
+              ";" = "end";
+            };
 
-              q = "!";
-              w = "@";
-              e = "#";
-              r = "$";
-              t = "%";
-              y = "^";
-              u = "&";
-              i = "*";
-              o = "(";
-              p = ")";
-              f = "-";
+            capslock = {
+            };
+
+            "rightalt" = {
+              p = "9";
+              o = "8";
+              i = "7";
+              l = "6";
+              k = "5";
+              j = "4";
+              m = "3";
+              n = "2";
+              b = "1";
+              v = "0";
+            };
+
+            rightmeta = {
+              # shift = "oneshot(shift)";
+              # "a" = "overloadi(a, overloadt2(control, a, 200), 150)";
+              # "a" = "lettermod(meta, a, 150, 200)";
+              # "d" = "lettermod(alt, d, 150, 200)";
+              # "k" = "lettermod(control, k, 150, 200)";
+
+              # left hand
+              q = "q";
+              w = "w";
+              e = "f";
+              r = "p";
+              t = "b";
+
+              a = "a";
+              s = "r";
+              d = "s";
+              f = "t";
+              g = "g";
+
+              z = "z";
+              x = "x";
+              c = "c";
+              v = "d";
+              b = "v";
+
+              # right hand
+              y = "j";
+              u = "l";
+              i = "u";
+              o = "y";
+
+              h = "m";
+              j = "n";
+              k = "e";
+              l = "i";
+              ";" = "o";
+
+              n = "k";
+              m = "h";
+              "," = "backspace";
+
+              # punct
+              "." = ".";
+              "a+s" = ",";
+              "d+s" = "\"";
+              "j+k" = "?";
+              "k+l" = "'";
+              "n+m" = ":";
+              "o+p" = ";";
+
+              "q+w" = "~";
+              "q+e" = "#";
+              "q+r" = "@";
+              "q+d" = "$";
+
+              "q+i" = "!";
+              "q+h" = ")";
+              "q+k" = "%";
+              "q+l" = "^";
+
+              "q+v" = "&";
+              "q+b" = "*";
+              "q+n" = "(";
+              "q+m" = ")";
+              "q+z" = "[";
+              "q+g" = "]";
             };
 
             "shift" = {
@@ -116,62 +179,6 @@
               # n = "K";
               # m = "H";
               # "," = "backspace";
-            };
-
-            capslock = {
-            };
-
-            rightalt = {
-              u = "left";
-              y = "down";
-              n = "up";
-              m = "right";
-              o = "home";
-              ";" = "end";
-            };
-
-            rightmeta = {
-              # left hand
-              q = "q";
-              w = "w";
-              e = "f";
-              r = "p";
-              t = "b";
-
-              a = "a";
-              s = "r";
-              d = "s";
-              f = "t";
-              g = "g";
-
-              z = "z";
-              x = "x";
-              c = "c";
-              v = "d";
-              b = "v";
-
-              # right hand
-              y = "j";
-              u = "l";
-              i = "u";
-              o = "y";
-              p = ";";
-
-              h = "m";
-              j = "n";
-              k = "e";
-              l = "i";
-              ";" = "o";
-
-              n = "k";
-              m = "h";
-              "," = "backspace";
-
-              # punct
-              "." = ".";
-              "a+s" = ",";
-              "j+k" = "?";
-              "n+m" = ":";
             };
           };
 
