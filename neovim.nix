@@ -41,7 +41,7 @@
     ./oil.nix
     ./treesitter.nix
     ./undotree.nix
-    ./zk.nix
+    # ./zk.nix
     # ./no-options.nix
     # quicker
     #./indent-blankline.nix

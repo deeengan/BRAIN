@@ -30,6 +30,7 @@
     # utilities
     ./aerc.nix
     ./browsh.nix
+    ./firefox.nix
     ./gpg.nix
     ./ncpamixer.nix
     ./pandoc.nix
@@ -42,9 +43,6 @@
     mplayer
     ncpamixer
     reaper
-
-    # brow
-    firefox
 
     # fonts
     fontforge-gtk
@@ -68,13 +66,14 @@
     yt-dlp
 
     # life
-    keepassxc
+    borgbackup
     hledger
+    keepassxc
     remind
     signal-desktop
     ticker
     weather
-    zk
+    # zk
 
     # phys
     btop
@@ -87,12 +86,12 @@
 
     # util
     fuzzel
+    keyd
     nautilus
     showmethekey
     unzip
     wl-clipboard
     zip
-    keyd
 
     # story
     inklecate

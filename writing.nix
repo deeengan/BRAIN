@@ -361,7 +361,7 @@
 
     {
       mode = "n";
-      key = "<leader>ch";
+      key = "<leader>sh";
       action = ":FzfLua search_history<CR>";
     }
 

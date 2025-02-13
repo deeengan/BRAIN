@@ -337,17 +337,16 @@
       '';
 
       dict = ''        function dict
-               cp ~/PITH/I93ETPMQ.html ~/SITE/看馬利亞/index.html
-               cp ~/PITH/I93ETPMQ.html ~/SITE/index-看馬利亞.html
+               cp ~/MIND/I93ETPMQ.html ~/SITE/看馬利亞/index.html
+               cp ~/MIND/I93ETPMQ.html ~/SITE/index-看馬利亞.html
                end
       '';
 
       dirs = ''        function dirs
-               # cp to PITH
-                   cp -rf ~/.config/nvim/syntax/ ~/PITH/MAT86EB3/
-                   cp -rf ~/Downloads/sioyek ~/PITH/MAT86EB3/
-                   cp -rf ~/.config/REAPER/Configurations ~/PITH/MAT86EB3/REAPER/
-                   cp -rf ~/reaper/*.RPP ~/PITH/MAT86EB3/REAPER/
+               # cp to MIND
+                   cp -rf ~/Downloads/sioyek ~/MIND/MAT86EB3/
+                   cp -rf ~/.config/REAPER/Configurations ~/MIND/MAT86EB3/REAPER/
+                   cp -rf ~/reaper/*.RPP ~/MIND/MAT86EB3/REAPER/
                # cp random things to beetle
                  # dots
                      cp -rf ~/.pandoc/ ~/mnt/beetle/
@@ -355,7 +354,7 @@
                      cp -rf ~/.gnupg/ ~/mnt/beetle/
                  # files
                    cp -rf ~/BRAIN/ ~/mnt/beetle/
-                   cp -rf ~/PITH/ ~/mnt/beetle/
+                   cp -rf ~/MIND/ ~/mnt/beetle/
                    cp -rf ~/SITE/ ~/mnt/beetle/
                    cp -rf ~/.password-store/ ~/mnt/beetle/
                  # clips && audio
@@ -364,42 +363,6 @@
                    cp -rf ~/.local/share/Anki2/Main/* ~/mnt/beetle/
                    cp -rf ~/.local/share/Anki2/Main/collection.media/* ~/mnt/beetle/
              end
-      '';
-
-      # fix
-      ssha = ''
-        function __ssh_agent_is_started -d "check if ssh agent is already started"
-           if begin; test -f $SSH_ENV; and test -z "$SSH_AGENT_PID"; end
-              source $SSH_ENV > /dev/null
-           end
-
-           if test -z "$SSH_AGENT_PID"
-              return 1
-           end
-
-           ps -ef | grep $SSH_AGENT_PID | grep -v grep | grep -q ssh-agent
-           #pgrep ssh-agent
-           return $status
-        end
-
-
-        function __ssh_agent_start -d "start a new ssh agent"
-           ssh-agent -c | sed 's/^echo/#echo/' > $SSH_ENV
-           chmod 600 $SSH_ENV
-           source $SSH_ENV > /dev/null
-           true  # suppress errors from setenv, i.e. set -gx
-        end
-
-
-        function fish_ssh_agent --description "Start ssh-agent if not started yet, or uses already started ssh-agent."
-           if test -z "$SSH_ENV"
-              set -xg SSH_ENV $HOME/.ssh/environment
-           end
-
-           if not __ssh_agent_is_started
-              __ssh_agent_start
-           end
-        end
       '';
     };
 
@@ -410,14 +373,19 @@
       bind \cj history-search-forward
       bind \ck history-search-backward
       bind \cl forward-char
+
+      set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
+      set -e SSH_AUTH_SOCK
       set -x EDITOR nvim
-      set -x LEDGER_FILE ~/PITH/XP6VMXXU.hledger
-      set -x ZK_NOTEBOOK_DIR ~/PITH/
+      set -x LEDGER_FILE ~/MIND/XP6VMXXU.hledger
+      set -x ZK_NOTEBOOK_DIR ~/MIND/
       set fish_greeting ""
       set fish_save_history yes
     '';
 
     loginShellInit = ''
+      gpgconf --launch gpg-agent
+      fixGpg
     '';
 
     plugins = [
@@ -452,7 +420,7 @@
       ".." = "cd ../";
       "b" = "cd ~/BRAIN/";
       "ff" = "ffmpeg -i input.webm output.mp4";
-      "p" = "cd ~/PITH/";
+      "p" = "cd ~/MIND/";
       "yt" = "yt-dlp --format mp4 [video URL]";
     };
 

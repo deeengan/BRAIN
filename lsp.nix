@@ -3,6 +3,7 @@
     enable = true;
     servers = {
       nixd.enable = true;
+      marksman.enable = true;
     };
 
     keymaps.lspBuf = {
