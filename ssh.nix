@@ -1,6 +1,4 @@
 {
-  # https://ryanlue.com/posts/2017-06-29-gpg-for-ssh-auth
-
   services.openssh = {
     enable = true;
     ports = [

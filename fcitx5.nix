@@ -19,7 +19,7 @@
         text = ''
           EnableFractionalScale=True
           Font="BabelStoneHan 12"
-          Theme=earthsong
+          Theme=min
           Vertical Candidate List=True
         '';
       };
@@ -112,14 +112,14 @@
         '';
       };
 
-      ".local/share/fcitx5/themes/earthsong/theme.conf" = {
+      ".local/share/fcitx5/themes/min/theme.conf" = {
         force = true;
         text = ''
           [Metadata]
-          Name=fcitx5 config
-          Version=0.1
+          Name=minimal fcitx5 config
+          Version=0.2
           Author=李永安
-          Description=follows stlix
+          Description=follows stylix
           ScaleWithDPI=True
         '';
       };

@@ -342,27 +342,40 @@
                end
       '';
 
-      dirs = ''        function dirs
-               # cp to MIND
-                   cp -rf ~/Downloads/sioyek ~/MIND/MAT86EB3/
-                   cp -rf ~/.config/REAPER/Configurations ~/MIND/MAT86EB3/REAPER/
-                   cp -rf ~/reaper/*.RPP ~/MIND/MAT86EB3/REAPER/
-               # cp random things to beetle
-                 # dots
-                     cp -rf ~/.pandoc/ ~/mnt/beetle/
-                     cp -rf ~/.ssh/ ~/mnt/beetle/
-                     cp -rf ~/.gnupg/ ~/mnt/beetle/
-                 # files
-                   cp -rf ~/BRAIN/ ~/mnt/beetle/
-                   cp -rf ~/MIND/ ~/mnt/beetle/
-                   cp -rf ~/SITE/ ~/mnt/beetle/
-                   cp -rf ~/.password-store/ ~/mnt/beetle/
-                 # clips && audio
-                   cp -rf ~/.config/REAPER/Configurations/ ~/mnt/beetle/
-                   cp -rf ~/reaper/nannang-intro.RPP ~/mnt/beetle/
-                   cp -rf ~/.local/share/Anki2/Main/* ~/mnt/beetle/
-                   cp -rf ~/.local/share/Anki2/Main/collection.media/* ~/mnt/beetle/
-             end
+      dirs = ''           function dirs
+          # cp to MIND
+              cp -rf ~/Downloads/sioyek ~/MIND/MAT86EB3/
+              cp -rf ~/.config/REAPER/Configurations ~/MIND/MAT86EB3/REAPER/
+              cp -rf ~/reaper/*.RPP ~/MIND/MAT86EB3/REAPER/
+          # cp random things to beetle
+            # dots
+                cp -rf ~/.pandoc/ ~/mnt/beetle/
+                cp -rf ~/.ssh/ ~/mnt/beetle/
+                cp -rf ~/.gnupg/ ~/mnt/beetle/
+            # files
+              cp -rf ~/BRAIN/ ~/mnt/beetle/
+              cp -rf ~/MIND/ ~/mnt/beetle/
+              cp -rf ~/SITE/ ~/mnt/beetle/
+              cp -rf ~/.password-store/ ~/mnt/beetle/
+            # clips && audio
+              cp -rf ~/.config/REAPER/Configurations/ ~/mnt/beetle/
+              cp -rf ~/reaper/nannang-intro.RPP ~/mnt/beetle/
+              cp -rf ~/.local/share/Anki2/Main/* ~/mnt/beetle/
+              cp -rf ~/.local/share/Anki2/Main/collection.media/* ~/mnt/beetle/
+        end
+      '';
+
+      # https://stackoverflow.com/questions/44250002/how-to-solve-sign-and-send-pubkey-signing-failed-agent-refused-operation
+      # https://superuser.com/questions/1075404/how-can-i-restart-gpg-agent
+      # gpg agent does not manually restart for ssh; must be killed and restarted manually
+
+      gpgssh = ''
+        set -e SSH_AGENT_PID
+        if test -z $gnupg_SSH_AUTH_SOCK_BY; or test $gnupg_SSH_AUTH_SOCK_BY -ne $fish_pid
+            set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+        end
+        set -gx GPG_TTY (tty)
+        gpg-connect-agent updatestartuptty /bye >/dev/null
       '';
     };
 
@@ -374,18 +387,22 @@
       bind \ck history-search-backward
       bind \cl forward-char
 
-      set -U -x SSH_AUTH_SOCK ~/.gnupg/S.gpg-agent.ssh
-      set -e SSH_AUTH_SOCK
       set -x EDITOR nvim
       set -x LEDGER_FILE ~/MIND/XP6VMXXU.hledger
       set -x ZK_NOTEBOOK_DIR ~/MIND/
       set fish_greeting ""
       set fish_save_history yes
+
+      set -e SSH_AUTH_SOCK
+      set -U -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+
+      set -e SSH_AGENT_PID
+      set -U -x GPG_TTY (tty)
     '';
 
     loginShellInit = ''
+      gpgconf --kill gpg-agent
       gpgconf --launch gpg-agent
-      fixGpg
     '';
 
     plugins = [
