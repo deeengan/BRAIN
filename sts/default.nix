@@ -1,7 +1,6 @@
-{ ... }: {
-
-    imports = [
-        ./nix-garbage-collect.nix
-
+{...}: {
+  imports = [
+    ./nix-garbage-collect.nix
+    ./borg.nix
   ];
 }

@@ -1,11 +1,5 @@
 {pkgs, ...}: {
-  programs.gpg = {
-    enable = true;
-    settings = {
-      pinentry-mode = "loopback";
-    };
-  };
-
+  # instead of sshKeys
   home = {
     file = {
       ".gnupg/sshcontrol" = {
@@ -28,6 +22,13 @@
     };
   };
 
+  programs.gpg = {
+    enable = true;
+    settings = {
+      pinentry-mode = "ask";
+    };
+  };
+
   services.gpg-agent = {
     defaultCacheTtl = 28800;
     defaultCacheTtlSsh = 28800;
@@ -44,7 +45,6 @@
     # ];
 
     extraConfig = ''
-      allow-loopback-pinentry
     '';
   };
 }

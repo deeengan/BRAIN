@@ -307,6 +307,12 @@
 
     {
       mode = "n";
+      key = "<leader>jp";
+      action = ":FzfLua jumps<CR>";
+    }
+
+    {
+      mode = "n";
       key = "<leader>km";
       action = ":FzfLua keymaps<CR>";
     }
