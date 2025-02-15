@@ -4,22 +4,25 @@
     archiveBaseName = "everything";
 
     paths = [
-      "/var/lib"
-      "/srv"
-      "/home"
+      "/home/deeengan/BRAIN/"
+      "/home/deeengan/MIND/"
     ];
 
     encryption = {
       mode = "repokey-blake2";
-      passCommand = "pass --clip 李永安/borgbase/com";
+      passCommand = "pass 李永安/borgbase/ssh";
     };
-    environment.BORG_RSH = "ssh -i ~/.gnupg/private-keys-v1.d/";
+
+    environment.BORG_RSH = "ssh -i /home/deeengan/.gnupg/private-keys-v1.d/";
     compression = "auto,lz4";
     startAt = "daily";
 
     exclude = [
       "**/target"
       "/boot"
+      "/home/deeengan/.var/"
+      "/home/deeengan/.local/"
+      "/home/deeengan/Downloads/"
       "/dev"
       "/nix"
       "/proc"
@@ -50,6 +53,6 @@
       monthly = -3; # Keep at least one archive for each month
     };
 
-    repo = "z2j43163@z2j43163.repo.borgbase.com/./repo";
+    repo = "ssh://z2j43163@z2j43163.repo.borgbase.com/./repo";
   };
 }

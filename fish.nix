@@ -379,6 +379,7 @@
       '';
     };
 
+    # https://fishshell.com/docs/current/cmds/set.html
     interactiveShellInit = ''
       bind \cb backward-word
       bind \ce forward-word
@@ -393,11 +394,13 @@
       set fish_greeting ""
       set fish_save_history yes
 
+      set -Ux BORG_PASSPHRASE (pass 李永安/borgbase/ssh)
+
       set -e SSH_AUTH_SOCK
-      set -U -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+      set -Ux SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 
       set -e SSH_AGENT_PID
-      set -U -x GPG_TTY (tty)
+      set -Ux GPG_TTY (tty)
     '';
 
     loginShellInit = ''
@@ -436,8 +439,19 @@
       "." = "cd -";
       ".." = "cd ../";
       "b" = "cd ~/BRAIN/";
+      "barg" = "borg create ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::date ~/BRAIN/ ~/dee-engan-llc/ ~/MIND/ ~/.local/share/Anki2/Main/collection.media/";
+      "blrg" = "borg list \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
+      "m" = "cd ~/MIND/";
+      "pclp" = "pass --clip";
+      "sizz" = "du --all --human-readable --max-depth=2 --total | sort --human-numeric-sort";
+      "snrb" = "sudo nixos-rebuild switch --flake .#nixos --show-trace";
+
+      "sysb" = "journalctl -fu borgbackup-job-borgbase.service";
+      "sysf" = "systemctl --failed";
+      "sysma" = "systemctl list-timers --all";
+      "syssa" = "systemctl list-units --type=service --state=active";
+
       "ff" = "ffmpeg -i input.webm output.mp4";
-      "p" = "cd ~/MIND/";
       "yt" = "yt-dlp --format mp4 [video URL]";
     };
 
