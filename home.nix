@@ -50,8 +50,13 @@
     python312Packages.fonttools
 
     # fzf(-lua)
-    ripgrep
+    broot
+    eza
     fd
+    file
+    hexyl
+    procs
+    ripgrep
 
     # GPG
     pinentry

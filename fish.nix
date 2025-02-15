@@ -380,6 +380,7 @@
     };
 
     # https://fishshell.com/docs/current/cmds/set.html
+    # https://www.cyberciti.biz/faq/linux-list-all-environment-variables-env-command/
     interactiveShellInit = ''
       bind \cb backward-word
       bind \ce forward-word
@@ -421,8 +422,8 @@
       }
 
       {
-        name = "fzf";
-        src = pkgs.fishPlugins.fzf.src;
+        name = "fifc";
+        src = pkgs.fishPlugins.fifc.src;
       }
 
       {
@@ -442,9 +443,13 @@
       "b" = "cd ~/BRAIN/";
       "m" = "cd ~/MIND/";
 
-      "barg" = "borg create ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::date ~/BRAIN/ ~/dee-engan-llc/ ~/MIND/ ~/.local/share/Anki2/Main/collection.media/";
+      "barg" = "borg create --progress --stats ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::date ~/BRAIN/ ~/dee-engan-llc/ ~/MIND/ ~/.local/share/Anki2/Main/collection.media/";
+      "bcrg" = "borg compact --cleanup-commits --progress --threshold 5 --verbose \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
+      "berg" = "borg extract --dry-run --list \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::init\"";
       "birg" = "borg info \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
       "blrg" = "borg list \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
+      "bprg" = "borg prune --force --keep-daily=7 --keep-weekly=4 --keep-monthly=4 --keep-yearly=4 --list --stats -v \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
+      "bvrg" = "borg version \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
 
       "pclp" = "pass --clip";
       "sizz" = "du --all --human-readable --max-depth=2 --total | sort --human-numeric-sort";

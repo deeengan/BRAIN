@@ -1,3 +1,4 @@
+# maybe deprecate
 {...}: {
   # ssh -i ~/.gnupg/private-keys-v1.d/ z2j43163@z2j43163.repo.borgbase.com
   services.borgbackup.jobs."borgbase" = {

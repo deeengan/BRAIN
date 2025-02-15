@@ -1,8 +1,13 @@
 {pkgs, ...}: {
-  users.users.deeengan = {
-    isNormalUser = true;
-    extraGroups = ["networkmanager" "wheel"];
-    shell = pkgs.fish;
+  users = {
+    users.deeengan = {
+      isNormalUser = true;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+      shell = pkgs.fish;
+    };
   };
 
   nix.settings.trusted-users = [
