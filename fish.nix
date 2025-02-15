@@ -388,19 +388,20 @@
       bind \ck history-search-backward
       bind \cl forward-char
 
-      set -x EDITOR nvim
-      set -x LEDGER_FILE ~/MIND/XP6VMXXU.hledger
-      set -x ZK_NOTEBOOK_DIR ~/MIND/
       set fish_greeting ""
       set fish_save_history yes
 
-      set -Ux BORG_PASSPHRASE (pass 李永安/borgbase/ssh)
+      set --export EDITOR nvim
+      set --export LEDGER_FILE ~/MIND/XP6VMXXU.hledger
+      set --export ZK_NOTEBOOK_DIR ~/MIND/
 
-      set -e SSH_AUTH_SOCK
-      set -Ux SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+      set --export --universal BORG_PASSPHRASE (pass 李永安/borgbase/ssh)
 
-      set -e SSH_AGENT_PID
-      set -Ux GPG_TTY (tty)
+      set --erase SSH_AUTH_SOCK
+      set --export --universal SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+
+      set --erase SSH_AGENT_PID
+      set --export --universal GPG_TTY (tty)
     '';
 
     loginShellInit = ''
@@ -439,9 +440,12 @@
       "." = "cd -";
       ".." = "cd ../";
       "b" = "cd ~/BRAIN/";
-      "barg" = "borg create ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::date ~/BRAIN/ ~/dee-engan-llc/ ~/MIND/ ~/.local/share/Anki2/Main/collection.media/";
-      "blrg" = "borg list \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
       "m" = "cd ~/MIND/";
+
+      "barg" = "borg create ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::date ~/BRAIN/ ~/dee-engan-llc/ ~/MIND/ ~/.local/share/Anki2/Main/collection.media/";
+      "birg" = "borg info \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
+      "blrg" = "borg list \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
+
       "pclp" = "pass --clip";
       "sizz" = "du --all --human-readable --max-depth=2 --total | sort --human-numeric-sort";
       "snrb" = "sudo nixos-rebuild switch --flake .#nixos --show-trace";
