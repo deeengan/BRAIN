@@ -369,7 +369,12 @@
       # https://superuser.com/questions/1075404/how-can-i-restart-gpg-agent
       # gpg agent does not manually restart for ssh; must be killed and restarted manually
 
-      gpgssh = ''
+      klst = ''
+        gpgconf --kill gpg-agent
+        gpgconf --launch gpg-agent
+      '';
+
+      gssh = ''
         set -e SSH_AGENT_PID
         if test -z $gnupg_SSH_AUTH_SOCK_BY; or test $gnupg_SSH_AUTH_SOCK_BY -ne $fish_pid
             set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
@@ -396,18 +401,16 @@
       set --export LEDGER_FILE ~/MIND/XP6VMXXU.hledger
       set --export ZK_NOTEBOOK_DIR ~/MIND/
 
-      set --export --universal BORG_PASSPHRASE (pass 李永安/borgbase/ssh)
-
-      set --erase SSH_AUTH_SOCK
-      set --export --universal SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-
-      set --erase SSH_AGENT_PID
-      set --export --universal GPG_TTY (tty)
+      set --export BORG_PASSCOMMAND (pass 李永安/borgbase/ssh)
     '';
 
+    # must be put here or else shell will hang
     loginShellInit = ''
-      gpgconf --kill gpg-agent
-      gpgconf --launch gpg-agent
+      set --erase SSH_AGENT_PID
+      set --erase SSH_AUTH_SOCK
+      set --export --global SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+      set --export --global GPG_TTY (tty)
+      gpg-connect-agent updatestartuptty /bye >/dev/null
     '';
 
     plugins = [

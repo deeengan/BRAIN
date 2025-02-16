@@ -76,7 +76,7 @@
     {
       mode = "n";
       key = "<leader>rm";
-      action = ":! remind ~/PITH/9JOAAM7J.rem<CR>";
+      action = ":! remind ~/MIND/9JOAAM7J.rem<CR>";
     }
 
     # formatting
@@ -212,7 +212,7 @@
     {
       mode = "n";
       key = "<leader>hh";
-      action = ":Git diff --no-index --word-diff=plain ~/PITH/6TW8S034.md ~/PITH/18U1Z3ER.md<CR>";
+      action = ":Git diff --no-index --word-diff=plain ~/MIND/6TW8S034.md ~/MIND/18U1Z3ER.md<CR>";
     }
 
     {
@@ -233,7 +233,7 @@
     {
       mode = "n";
       key = "<leader>s0";
-      action = ":source ~/PITH/8AFK49NM.vim<CR>";
+      action = ":source ~/MIND/8AFK49NM.vim<CR>";
     }
 
     # where to put sessions
@@ -241,7 +241,7 @@
     {
       mode = "n";
       key = "<leader>mk";
-      action = ":mksession ~/PITH/N6949URA.vim<CR>";
+      action = ":mksession ~/MIND/N6949URA.vim<CR>";
     }
 
     # registers
@@ -250,7 +250,7 @@
     {
       mode = "n";
       key = "<leader>w1";
-      action = ":wv ~/PITH/YASU72AV.vim<CR>";
+      action = ":wv ~/MIND/YASU72AV.vim<CR>";
     }
 
     # load
@@ -258,7 +258,7 @@
     {
       mode = "n";
       key = "<leader>v1";
-      action = ":rv ~/PITH/YASU72AV.vim<CR>";
+      action = ":rv ~/MIND/YASU72AV.vim<CR>";
     }
 
     # FzfLua
@@ -447,13 +447,13 @@
     {
       mode = "n";
       key = "<leader>ia";
-      action = ":ZkNew { dir = '/home/deeengan/PITH/', group = 'IR7I32C9', template = 'EM5EQUG8.md', title = vim.fn.input('Title: '), content = vim.fn.input('Tags: ') }<CR>";
+      action = ":ZkNew { dir = '/home/deeengan/MIND/', group = 'IR7I32C9', template = 'EM5EQUG8.md', title = vim.fn.input('Title: '), content = vim.fn.input('Tags: ') }<CR>";
     }
 
     {
       mode = "n";
       key = "<leader>dy";
-      action = ":ZkNew { dir = '/home/deeengan/PITH/WB3LHT7H/', group = '3DRLMKUS', template = '3DRLMKUS.md' }<CR>";
+      action = ":ZkNew { dir = '/home/deeengan/MIND/WB3LHT7H/', group = '3DRLMKUS', template = '3DRLMKUS.md' }<CR>";
     }
 
     # new from content selection
