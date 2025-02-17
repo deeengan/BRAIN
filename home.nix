@@ -25,7 +25,7 @@
     ./alacritty.nix
     ./fish.nix
     ./fzf.nix
-    ./starship.nix
+    # ./starship.nix
 
     # utilities
     ./aerc.nix
@@ -67,7 +67,6 @@
 
     # lang
     anki
-    binserve
     yt-dlp
 
     # life
@@ -90,9 +89,7 @@
     alacritty
 
     # util
-    fuzzel
     keyd
-    nautilus
     showmethekey
     unzip
     wl-clipboard

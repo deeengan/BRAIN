@@ -271,8 +271,20 @@
 
     {
       mode = "n";
+      key = "<leader>bi";
+      action = ":FzfLua builtins<CR>";
+    }
+
+    {
+      mode = "n";
       key = "<leader>ch";
       action = ":FzfLua command_history<CR>";
+    }
+
+    {
+      mode = "n";
+      key = "<leader>ne";
+      action = ":FzfLua changes<CR>";
     }
 
     {

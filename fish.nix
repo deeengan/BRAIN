@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   # https://github.com/fish-shell/fish-shell/tree/master/share/completions
   # https://github.com/pirate/fish-utils
+  # https://fishshell.com/docs/current/interactive.html
 
   home = {
     file = {
@@ -368,12 +369,12 @@
       # https://stackoverflow.com/questions/44250002/how-to-solve-sign-and-send-pubkey-signing-failed-agent-refused-operation
       # https://superuser.com/questions/1075404/how-can-i-restart-gpg-agent
       # gpg agent does not manually restart for ssh; must be killed and restarted manually
-
       klst = ''
         gpgconf --kill gpg-agent
         gpgconf --launch gpg-agent
       '';
 
+      # in case need to restart
       gssh = ''
         set -e SSH_AGENT_PID
         if test -z $gnupg_SSH_AUTH_SOCK_BY; or test $gnupg_SSH_AUTH_SOCK_BY -ne $fish_pid
@@ -386,13 +387,16 @@
 
     # https://fishshell.com/docs/current/cmds/set.html
     # https://www.cyberciti.biz/faq/linux-list-all-environment-variables-env-command/
+    # do not set gpg-conf here or will hang
     interactiveShellInit = ''
+      bind \ca end-of-line
       bind \cb backward-word
       bind \ce forward-word
       bind \ch backward-char
       bind \cj history-search-forward
       bind \ck history-search-backward
       bind \cl forward-char
+      bind \co beginning-of-line
 
       set fish_greeting ""
       set fish_save_history yes
@@ -402,15 +406,19 @@
       set --export ZK_NOTEBOOK_DIR ~/MIND/
 
       set --export BORG_PASSCOMMAND (pass 李永安/borgbase/ssh)
+
+      set --universal hydro_symbol_git_ahead "󰞍"
+      set --universal hydro_symbol_git_behind " "
+      set --universal hydro_symbol_git_dirty " 󰛢"
+      set --universal hydro_symbol_prompt " "
+      set --universal hydro_symbol_start " "
+
+      set --universal fifc_keybinding \cx
+
+      set --universal fish_key_bindings fish_default_key_bindings
     '';
 
-    # must be put here or else shell will hang
     loginShellInit = ''
-      set --erase SSH_AGENT_PID
-      set --erase SSH_AUTH_SOCK
-      set --export --global SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-      set --export --global GPG_TTY (tty)
-      gpg-connect-agent updatestartuptty /bye >/dev/null
     '';
 
     plugins = [
@@ -430,8 +438,8 @@
       }
 
       {
-        name = "spark";
-        src = pkgs.fishPlugins.spark.src;
+        name = "hydro";
+        src = pkgs.fishPlugins.hydro.src;
       }
 
       {
@@ -444,9 +452,12 @@
       "." = "cd -";
       ".." = "cd ../";
       "b" = "cd ~/BRAIN/";
+      "dapp" = "</dev/null &>/dev/null &";
       "m" = "cd ~/MIND/";
+      "rebt" = "reboot";
+      "sdnw" = "shutdown now";
 
-      "barg" = "borg create --progress --stats ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::date ~/BRAIN/ ~/dee-engan-llc/ ~/MIND/ ~/.local/share/Anki2/Main/collection.media/";
+      "barg" = "borg create --progress --stats ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::date ~/anki ~/BRAIN/ ~/dee-engan-llc/ ~/MIND/ ~/SITE/ ~/.local/share/Anki2/Main/collection.media/";
       "bcrg" = "borg compact --cleanup-commits --progress --threshold 5 --verbose \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
       "berg" = "borg extract --dry-run --list \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo::init\"";
       "birg" = "borg info \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
@@ -454,8 +465,16 @@
       "bprg" = "borg prune --force --keep-daily=7 --keep-weekly=4 --keep-monthly=4 --keep-yearly=4 --list --stats -v \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
       "bvrg" = "borg version \"ssh://z2j43163@z2j43163.repo.borgbase.com/./repo\"";
 
+      "ga" = "git add --all";
+      "gc" = "git commit -m \"():\"";
+      "gh" = "git push origin main";
+      "glp" = "git log --pretty";
+      "gs" = "git status --verbose";
+
       "pclp" = "pass --clip";
       "sizz" = "du --all --human-readable --max-depth=2 --total | sort --human-numeric-sort";
+
+      "nxfu" = "nix flake update --flake";
       "snrb" = "sudo nixos-rebuild switch --flake .#nixos --show-trace";
 
       "sysb" = "journalctl -fu borgbackup-job-borgbase.service";
@@ -469,10 +488,15 @@
 
     shellAliases = {
       grep = "grep --color=always";
-      ls = "ls --color=always";
+      ls = "eza";
     };
 
     shellInit = ''
+      set --erase SSH_AGENT_PID
+      set --erase SSH_AUTH_SOCK
+      set --export --global SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+      set --export --global GPG_TTY (tty)
+      gpg-connect-agent updatestartuptty /bye >/dev/null
     '';
   };
 }
