@@ -15,8 +15,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:pta2002/nixvim";
     };
-    stylix.url = "github:danth/stylix";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # stylix.url = "github:danth/stylix?rev=b00c9f46ae6c27074d24d2db390f0ac5ebcc329f";
+    textfox = {
+      url = "github:shadeyg56/textfox";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -25,9 +32,12 @@
     nixvim,
     stylix,
     ...
-  }: {
+  } @ inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs;
+      };
       modules = [
         stylix.nixosModules.stylix
         ./config.nix
@@ -44,14 +54,17 @@
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
+            extraSpecialArgs = {
+              inherit inputs;
+            };
             users.deeengan = {
               imports = [
                 nixvim.homeManagerModules.nixvim
                 ./home.nix
               ];
             };
+            useGlobalPkgs = true;
+            useUserPackages = true;
           };
         }
       ];

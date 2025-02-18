@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   # https://github.com/poetaman/arttime
 
   programs.home-manager.enable = true;
@@ -9,6 +13,7 @@
   };
 
   imports = [
+    inputs.textfox.homeManagerModules.default
     # aesthetics && switches
     ./hyprland.nix
     ./stylix.nix

@@ -21,19 +21,23 @@
       base0E = "#ff79c6";
       base0F = "#00f769";
     };
+
     cursor = {
       name = "Numix-Cursor";
       package = pkgs.numix-cursor-theme;
     };
+
     fonts = {
       emoji = {
         name = "Twitter Color Emoji";
         package = pkgs.twitter-color-emoji;
       };
+
       monospace = {
         name = "Lilex Nerd Font";
         package = pkgs.nerd-fonts.lilex;
       };
+
       sizes = {
         applications = 12;
         desktop = 12;
@@ -41,6 +45,7 @@
         terminal = 12;
       };
     };
+
     iconTheme = {
       enable = true;
       package = pkgs.whitesur-icon-theme.override {
@@ -50,10 +55,12 @@
       dark = "WhiteSur-dark";
       light = "WhiteSur-light";
     };
+
     image = pkgs.fetchurl {
       hash = "sha256-eErDPbvkFifZgDlu91z0SIVLJyCSHQDjlJYHYAape0o=";
       url = "https://cdn.esawebb.org/archives/images/large/weic2425c.jpg";
     };
+
     imageScalingMode = "tile";
     polarity = "dark";
     opacity = {
@@ -62,6 +69,7 @@
       popups = 0.7;
       terminal = 0.7;
     };
+
     targets = {
       fzf.enable = false;
       neovim.transparentBackground = {
