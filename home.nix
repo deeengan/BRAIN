@@ -108,5 +108,6 @@
     feh
     hyprshot
     imagemagick
+    ghostty
   ];
 }

@@ -39,15 +39,18 @@
             on-timeout = "brightnessctl -s set 20";
             on-resume = "brightnessctl -r";
           }
+
           {
             timeout = 600;
             on-timeout = "loginctl lock-session";
           }
+
           {
             timeout = 900;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
           }
+
           {
             timeout = 2000;
             on-timeout = "sysemctl suspend";
@@ -139,8 +142,9 @@
 
       decoration = {
         rounding = 12;
-        active_opacity = 0.9;
-        inactive_opacity = 0.9;
+        # seems to override stylix?
+        active_opacity = 0.8;
+        inactive_opacity = 0.8;
         shadow = {
           # enabled = true;
           # range = 100;

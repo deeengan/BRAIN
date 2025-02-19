@@ -76,19 +76,23 @@
       base0E = "#ff79c6";
       base0F = "#00f769";
     };
+
     cursor = {
       name = "Numix-Cursor";
       package = pkgs.numix-cursor-theme;
     };
+
     fonts = {
       emoji = {
         name = "Twitter Color Emoji";
         package = pkgs.twitter-color-emoji;
       };
+
       monospace = {
         name = "Lilex Nerd Font";
         package = pkgs.nerd-fonts.lilex;
       };
+
       sizes = {
         applications = 12;
         desktop = 12;
@@ -96,14 +100,17 @@
         terminal = 12;
       };
     };
+
     homeManagerIntegration = {
       autoImport = true;
       followSystem = true;
     };
+
     image = pkgs.fetchurl {
       hash = "sha256-eErDPbvkFifZgDlu91z0SIVLJyCSHQDjlJYHYAape0o=";
       url = "https://cdn.esawebb.org/archives/images/large/weic2425c.jpg";
     };
+
     imageScalingMode = "tile";
     polarity = "dark";
     targets = {

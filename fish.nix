@@ -453,6 +453,7 @@
       ".." = "cd ../";
       "b" = "cd ~/BRAIN/";
       "dapp" = "</dev/null &>/dev/null &";
+      "klal" = "jobs -p | xargs kill";
       "m" = "cd ~/MIND/";
       "rebt" = "reboot";
       "sdnw" = "shutdown now";

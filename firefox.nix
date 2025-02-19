@@ -4,6 +4,9 @@
 
     # https://mozilla.github.io/policy-templates/
     policies = {
+      DontCheckDefaultBrowser = true;
+      DisableMasterPasswordCreation = true;
+      DisablePasswordReveal = true;
       DisableFirefoxScreenshots = true;
       DisableFirefoxStudies = true;
       DisablePocket = true;
@@ -47,7 +50,7 @@
 
     profiles = {
       "deeengan" = {
-        id = 1;
+        id = 0; # must be 0 it default?
         isDefault = true;
         path = "deeengan";
         settings = {
@@ -60,10 +63,18 @@
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
           "browser.newtabpage.activity-stream.telemetry" = false;
 
+          "browser.onboarding.enabled" = false;
+
+          "browser.urlbar.shortcuts.bookmarks" = false;
+          "browser.urlbar.shortcuts.history" = false;
+          "browser.urlbar.shortcuts.tabs" = false;
+
           "extensions.update.autoUpdateDefault" = false;
           "extensions.update.enabled" = false;
 
           "sidebar.verticalTabs" = true;
+          "sidebar.main.tools" = "";
+          "sidebar.revamp" = true;
         };
       };
     };
@@ -81,7 +92,7 @@
         color = "";
         width = "";
         transition = "";
-        radius = "12pz";
+        radius = "12px";
       };
 
       displayHorizontalTabs = false;
